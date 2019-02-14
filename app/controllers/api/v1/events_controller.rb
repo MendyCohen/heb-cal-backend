@@ -5,8 +5,14 @@ class Api::V1::EventsController < ApplicationController
     render json: @events
   end
 
-  def show
-        @event = Event.find(params[:id])
+  # def show
+  #       @event = Event.find(params[:id])
+  #   end
+
+    def show
+      days = params[:id].split(', ')
+      @event = Event.where("date_part('day', day) = ? AND date_part('month', day) = ? AND date_part('year', day) = ?", *days)
+      render json: @event
     end
 
   def create
