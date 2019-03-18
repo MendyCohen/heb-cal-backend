@@ -4,7 +4,6 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_request!, only: [:index, :show, :create, :update]
 
   def index
-    #byebug
     @events = Event.all
     render json: @events
   end

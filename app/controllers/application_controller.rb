@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
   protected
 # Validates the token and user and sets the @current_user scope
 def authenticate_request!
-  #byebug
   if !payload || !JsonWebToken.valid_payload(payload.first)
     return invalid_authentication
   end
