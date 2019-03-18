@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2019_02_04_203755) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.float "longitude"
     t.float "latitude"
     t.datetime "created_at", null: false

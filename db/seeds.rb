@@ -6,17 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
+#User.destroy_all
 # Event.destroy_all
 # GlobalEvent.destroy_all
 
 10.times {
-  User.create(name: Faker::Name.name , latitude: 40.70062, longitude: -74.007230)
+  User.create(name: Faker::Name.name , email: (0...10).map { ('a'..'z').to_a[rand(26)] }.join + '@gmail.com' , password: '770' , latitude: 40.70062, longitude: -74.007230)
  }
+User.create(name: 'Mendy' , email: "mendy@gmail.com" , password: '770' , latitude: 40.70062, longitude: -74.007230)
 
 10.times {
-  Event.create(title: Faker::Military.army_rank, note: Faker::Seinfeld.character, hour: '12:00pm', day: Faker::Date.forward(50), user_id: Random.rand(10))
+  Event.create(title: Faker::Military.army_rank, note: Faker::Seinfeld.character, hour: '12:00pm', day: Faker::Date.forward(50), user_id: Random.rand(100))
 }
+Event.create(title: 'Baking Matzah', note: 'Chometz Rocks', hour: '12:00pm', day: Faker::Date.forward(50), user_id: 36)
+Event.create(title: 'Shmutz', note: 'Izzdabest', hour: '12:00pm', day: Faker::Date.forward(50), user_id: 79)
 
 10.times {
   GlobalEvent.create(title: Faker::Military.army_rank, note: Faker::Seinfeld.character, hour: '12:00am', day: Faker::Date.forward(50), user_id: Random.rand(10))
