@@ -1,6 +1,5 @@
 class Api::V1::EventsController < ApplicationController
 
-
   before_action :authenticate_request!, only: [:index, :show, :create, :update]
 
   def index
@@ -14,14 +13,9 @@ class Api::V1::EventsController < ApplicationController
 
     def show
       days = params[:id].split(', ')
-      #days.push(@current_user.id)
-      #@event = Event.where("date_part('day', day) = ? AND date_part('month', day) = ? AND date_part('year', day) = ? AND 'user_id' = ?", *days)
-      @event = Event.where("date_part('day', day) = ? AND date_part('month', day) = ? AND date_part('year', day) = ?", *days)
-      # fetch only events that belong to that user and get rid of the select
-      events = @event.select do |event|
-        event.user_id == @current_user.id
-      end
-      render json: events
+       # @event = Event.where("date_part('day', day) = ? AND date_part('month', day) = ? AND date_part('year', day) = ? AND user_id = ?", days[0], days[1], days[2], @current_user.id)
+       @event = Event.where("date_part('day', day) = ? AND date_part('month', day) = ? AND date_part('year', day) = ? AND user_id = ?", *days, @current_user.id)
+      render json: @event
     end
 
   def create
